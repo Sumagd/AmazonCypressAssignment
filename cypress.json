@@ -1,1 +1,17 @@
-{}
+{
+    "env":
+    {
+        "url":"https://www.amazon.com/",
+        "url2":"https://www.amazon.in/",
+        "email": "",
+        "password": "",
+        "cardNumber": "",
+        "cardName": "",
+        "name":"",
+        "phone":"",
+        "pincode":"",
+        "addressLine1":"",
+        "addressLine2":"",
+        "landMark":""
+    }
+}

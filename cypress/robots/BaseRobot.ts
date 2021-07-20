@@ -1,9 +1,15 @@
 /// <reference types="Cypress" />
 import '../support/index';
+import 'cypress-iframe'
 
 export abstract class BaseEyes {
   seesTextWithId(id: string, text: string) {
     cy.get(`#${id}`).should('have.text', text);
+    return this;
+  }
+
+  seesTextWithTagname(Tagname: string, text: string) {
+    cy.get(`${Tagname}`).should('have.text', text);
     return this;
   }
 
@@ -114,7 +120,7 @@ export abstract class BaseEyes {
   }
 
   seesPathNameInUrl(path: string) {
-    cy.location('pathname').should('eq', path);
+    cy.location('pathname').should('include', path);
     return this;
   }
 
@@ -133,11 +139,24 @@ export abstract class BaseEyes {
     cy.get(dom).should('not.be.disabled');
     return this;
   }
+
+ seesProductTitle(dom:string)
+  {
+    cy.get(`${dom}`).then(function(title)
+    {
+      let productTitle=title.text()
+      cy.log(productTitle)
+      cy.get(`${dom}`).should('have.text',productTitle)
+
+    })
+    return this;
+  }
+  
 }
 
 export class BaseHands {
   clickOnId(id: string) {
-    cy.get(`#${id}`).click();
+    cy.get(`#${id}`).click({force:true});
     return this;
   }
 
@@ -155,10 +174,22 @@ export class BaseHands {
     return this;
   }
 
-  clickOnDomElement(dom: string) {
-    cy.get(dom).click();
+  mouseOver(dom:string)
+  {
+    cy.get(dom).trigger('mouseover',{force:true})
     return this;
   }
+
+  clickOnDomElement(dom: string) {
+    cy.get(dom).click({force:true});
+    return this;
+  }
+
+  clickOnDomElementWithIndex(dom: string,index:number) {
+    cy.get(dom).eq(index).wait(4000).click({force:true});
+    return this;
+  }
+
 
   typeTextonDom(locatorName: string, locatorValue: string, text: string) {
     cy.get(`[${locatorName}="${locatorValue}"]`).type(text, { force: true });
@@ -170,10 +201,21 @@ export class BaseHands {
     return this;
   }
 
+
+  typeTextOnDomUsingCSS(dom: string, text: string) {
+    cy.get(`${dom}`).type(text, { force: true });
+    return this;
+  }
+  
+  checkTheDomElement(dom:string)
+  {
+      cy.get(`${dom}`).check({force:true});
+      return this;
+  }
   clickOnChildDom(parentId: string, dom: string, index: number) {
     cy.get(`#${parentId} ${dom}`)
       .eq(index)
-      .click();
+      .click({force:true});
     return this;
   }
 
@@ -189,17 +231,47 @@ export class BaseHands {
     return this;
   }
 
+  scrollAndClickOndom(dom: string) {
+    cy.get(`${dom}`).scrollIntoView().wait(4000).click({force:true});
+    return this;
+  }
+
   clickOnAgGridRow(rowId: string) {
     cy.get(`[row-id=${rowId}]`)
       .find('.ag-selection-checkbox')
       .click();
     return this;
   }
+  clickOnCSSTypeWithindex(dom:string,index:number)
+  {
+    cy.get(`${dom}`).eq(index).click();
+      return this;
+  }
 
+  clickOnChildDomWithIndexAndCSS(parentCSS:string,commonchildCSS:string,index:number)
+  {
+    cy.get(`${parentCSS},${commonchildCSS}`).eq(index).click();
+    return this;
+  }
   wait(milliSecs: number) {
     cy.wait(milliSecs);
     return this;
   }
+  
+ 
+  switchToFrame(frameLocator:string,locator:string,text:string)
+  {
+    cy.frameLoaded(frameLocator)
+    cy.wait(4000)
+    cy.iframe().find(locator).type(text)
+
+    return this;
+  }
+  navigateback()
+  {
+    cy.go('back')
+  }
+  
 }
 
 export class BaseDependencies {
