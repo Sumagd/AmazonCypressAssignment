@@ -142,10 +142,10 @@ export class RobotHands extends BaseHands{
     {
         this.checkTheDomElement(locator)
     }
-    switchToIFrame(iframelocator:string,dom:string,text:string)
-    {
-        this.switchToFrame(iframelocator,dom,text)
-    }
+    // switchToIFrame(iframelocator:string,dom:string,text:string)
+    // {
+    //     this.switchToFrame(iframelocator,dom,text)
+    // }
     clickOnAddress(locator:string)
     {
         this.clickOnDomElement(locator)

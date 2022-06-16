@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import '../support/index';
-import 'cypress-iframe'
+// import '../support/index';
+// import 'cypress-iframe'
 
 export abstract class BaseEyes {
   seesTextWithId(id: string, text: string) {
@@ -259,14 +259,14 @@ export class BaseHands {
   }
   
  
-  switchToFrame(frameLocator:string,locator:string,text:string)
-  {
-    cy.frameLoaded(frameLocator)
-    cy.wait(4000)
-    cy.iframe().find(locator).type(text)
+  // switchToFrame(frameLocator:string,locator:string,text:string)
+  // {
+  //   cy.frameLoaded(frameLocator)
+  //   cy.wait(4000)
+  //   cy.iframe().find(locator).type(text)
 
-    return this;
-  }
+  //   return this;
+  // }
   navigateback()
   {
     cy.go('back')

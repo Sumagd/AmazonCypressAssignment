@@ -116,7 +116,7 @@ const dependencies = new Dependencies()
             robotHands.clickOnSignIn('#signInSubmit')
             robotEyes.assertPath('/cpe/managepaymentmethods')
             robotHands.clickOnPaymentMethod('.a-button-input')
-            robotHands.switchToIFrame('iframe[class="apx-secure-iframe pmts-portal-component pmts-portal-components-pp-2gol5a-16"]','input[name="addCreditCardNumber"]',Cypress.env('cardNumber'))
+            // robotHands.switchToIFrame('iframe[class="apx-secure-iframe pmts-portal-component pmts-portal-components-pp-2gol5a-16"]','input[name="addCreditCardNumber"]',Cypress.env('cardNumber'))
             
             
         })
