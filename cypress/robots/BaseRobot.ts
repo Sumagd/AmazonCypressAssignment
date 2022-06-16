@@ -267,6 +267,8 @@ export class BaseHands {
 
   //   return this;
   // }
+
+  
   navigateback()
   {
     cy.go('back')
